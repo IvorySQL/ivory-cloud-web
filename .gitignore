@@ -1,0 +1,8 @@
+node_modules
+/background/cloud/weihaiDemo.tar.gz
+/logs/
+/background/cloud/logs/
+/logs/
+/background/cloud/src/test/java/com/highgo/cloud/
+
+/.idea/
