@@ -248,7 +248,7 @@
           <div id="u308" class="ax_default label">
             <div id="u308_div" class="" />
             <div id="u308_text" class="text ">
-              <p><a @click="loginHandel">登录</a>&nbsp;<a v-if="showRegister" @click="registerHandel">注册</a></p>
+              <p><a class="login" @click="loginHandel">登录</a>&nbsp;<a v-if="showRegister" @click="registerHandel">注册</a></p>
             </div>
           </div>
         </div>

@@ -43,6 +43,7 @@
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="集群" prop="clusterName">
               <el-select
+                ref="clusterName"
                 v-model="form.clusterName"
                 placeholder="请选择所在集群"
                 size="small"
@@ -65,7 +66,7 @@
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="命名空间" prop="namespace">
-              <el-select v-model="form.namespace" placeholder="请选择命名空间" size="small">
+              <el-select ref="namespace" v-model="form.namespace" placeholder="请选择命名空间" size="small">
                 <el-option
                   v-for="item in Namespace"
                   :key="item.metadata.uid"
@@ -90,6 +91,7 @@
             <el-form-item label="实例类型" prop="type">
               <el-radio
                 v-for="item in typelist"
+                ref="typeChange"
                 :key="item.id"
                 v-model="form.type"
                 :label="item.id"
@@ -335,6 +337,7 @@
 </style>
 <script>
 export default {
+  name: 'DBInstance',
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -690,7 +693,6 @@ export default {
     getNamespace(event) {
       const _this = this
       this.axios.get('/clusters/' + _this.form.clusterId + '/namespace').then(res => {
-        console.log(res)
         if (res.data && res.status === 200) {
           _this.Namespace = res.data
           // for (let i = 0; i < _this.Namespace.length; i++) {
@@ -1065,15 +1067,8 @@ export default {
           _this.form.clusterId = element.clusterId
         }
       })
-      console.log(this.form.clusterId, '=================')
       _this.getNamespace(event)
     },
-    // changeNamespace() {
-    //   console.log(this.form.namespace)
-    // },
-    // changeStorageClass() {
-    //
-    // },
     // 切换计费方式
     changeMethod() {
       const event = 'change'
