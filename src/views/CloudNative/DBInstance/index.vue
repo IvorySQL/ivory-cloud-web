@@ -198,7 +198,7 @@
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="存储类型" prop="storageClass">
-              <el-select v-model="form.storageClass" placeholder="请选择存储类型" size="small">
+              <el-select ref="storageClass" v-model="form.storageClass" placeholder="请选择存储类型" size="small">
                 <el-option
                   v-for="item in StorageClass"
                   :key="item.metadata.id"
