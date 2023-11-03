@@ -32,8 +32,6 @@ jobs:
     - name: Unit test
       run: npm run test:unit
     - name: run dev
-      run: npm run dev &
-    - name: Wait for 10 seconds
-      run: sleep 10
+      run: npm run dev & sleep 10
     - name: Function test
       run: cypress run
