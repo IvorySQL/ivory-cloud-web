@@ -251,7 +251,7 @@
         </el-row>
       </div>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-edit" @click="onSubmit('form')">下一步：确认信息
+        <el-button ref="submit" type="primary" icon="el-icon-edit" @click="onSubmit('form')">下一步：确认信息
         </el-button>
       </el-form-item>
     </el-form>

@@ -15,6 +15,15 @@ localVue.prototype.axios = axios
 // 模拟axios
 const mockAxios = new MockAdapter(axios)
 
+const routes = [
+  {
+    path: '/nativeCloud/ConfirmOrder/index'
+  },
+  {
+    path: '/nativeCloud/DBInstance/index'
+  }
+]
+
 describe('DBInstance.vue', () => {
   // 将mounted钩子替换为空函数
   DBInstance.mounted = jest.fn()
@@ -33,8 +42,8 @@ describe('DBInstance.vue', () => {
     wrapper.vm.getCluster()
     // 更新DOM
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.form.clusterId).toEqual('ef9d1dcfe80f440b9fa67a7ef2fcd30b')
-    expect(wrapper.vm.form.clusterName).toEqual('k8s')
+    expect(wrapper.vm.Cluster[0].clusterId).toEqual('ef9d1dcfe80f440b9fa67a7ef2fcd30b')
+    expect(wrapper.vm.Cluster[0].clusterName).toEqual('k8s')
   })
 
   it('选择集群', async () => {
@@ -47,9 +56,9 @@ describe('DBInstance.vue', () => {
       "clusterId": "ef9d1dcfe80f440b9fa67a7ef2fcd30b",
       "clusterName": "k8s"
     }]
-    wrapper.vm.form.clusterName = 'k8s'
     const select = wrapper.find({ref: 'clusterName'})
-    select.vm.$emit('change', 'k8s')
+    select.vm.$emit('input', 'k8s')
+    select.vm.$emit('change')
     await wrapper.vm.$nextTick()
     // 检查是否更新
     expect(wrapper.vm.form.clusterId).toEqual('ef9d1dcfe80f440b9fa67a7ef2fcd30b')
@@ -101,7 +110,6 @@ describe('DBInstance.vue', () => {
       localVue,
       stubs: ['SvgIcon']
     })
-
     mockAxios.onGet('/storage-class').reply(200,[{
         "metadata": {"name": "highgo"}
       }])
@@ -124,14 +132,20 @@ describe('DBInstance.vue', () => {
   })
 
   it('下一步', async () => {
+    const router = new VueRouter({ routes })
     const wrapper = shallowMount(DBInstance, {
       localVue,
+      router,
       stubs: ['SvgIcon']
     })
-    const elForm = wrapper.find({ref: 'form'});
-    expect(elForm.exists()).toBe(true);
-
-    elForm.vm.$emit('validate', true)
-    wrapper.vm.onSubmit('form')
+    // 设置表单校验通过
+    wrapper.vm.$refs['form'] = {
+      validate: jest.fn((callback) => {
+        callback(true)
+      })
+    }
+    const button = wrapper.find({ref: 'submit'})
+    button.vm.$emit('click')
+    expect(wrapper.vm.$route.path).toEqual('/nativeCloud/ConfirmOrder/index')
   })
 })
