@@ -31,3 +31,5 @@ jobs:
       run: npm run lint
     - name: Unit test
       run: npm run test:unit
+    - name: run dev
+      run: npm run dev
