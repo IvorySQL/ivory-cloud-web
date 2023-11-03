@@ -44,6 +44,7 @@
             <el-form-item label="集群" prop="clusterName">
               <el-select
                 ref="clusterName"
+                class="selectCluster"
                 v-model="form.clusterName"
                 placeholder="请选择所在集群"
                 size="small"
@@ -120,7 +121,7 @@
         <el-row>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="实例名称" prop="name">
-              <el-input v-model="form.name" size="small">
+              <el-input class="inputName" v-model="form.name" size="small">
                 <span slot="suffix">
                   <el-tooltip class="nameHelp" effect="dark" content="1-8个字符，只能以小写英文字母开头，名称只能包含小写英文字母、数字、“-”。">
                     <i class="el-icon-question" />
@@ -134,15 +135,15 @@
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-tooltip v-show="form.isRestore" class="restoreHelp" effect="dark" content="请输入此次备份时的数据库密码。">
               <el-form-item label="密码" prop="pass">
-                <el-input :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
+                <el-input  class="inputPwd" :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
                 <span class="show-pwd" @click="showPwd"><svg-icon
                   :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
                 /></span>
               </el-form-item>
             </el-tooltip>
             <el-form-item v-show="!form.isRestore" label="密码" prop="pass">
-              <el-input :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
-              <span class="show-pwd" @click="showPwd"><svg-icon
+              <el-input id="inputPwd" :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
+              <span id="show-pwd1" class="show-pwd" @click="showPwd"><svg-icon
                 :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
               /></span>
             </el-form-item>
@@ -151,8 +152,8 @@
         <el-row>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="确认密码" prop="checkPass">
-              <el-input :key="passwordType2" v-model="form.checkPass" :type="passwordType2" size="small" />
-              <span class="show-pwd" @click="showPwd2"><svg-icon
+              <el-input  id="confirmPdw" :key="passwordType2" v-model="form.checkPass" :type="passwordType2" size="small" />
+              <span  id="show-pwd2" class="show-pwd" @click="showPwd2"><svg-icon
                 :icon-class="passwordType2 === 'password' ? 'eye' : 'eye-open'"
               /></span>
             </el-form-item>
@@ -251,7 +252,7 @@
         </el-row>
       </div>
       <el-form-item>
-        <el-button ref="submit" type="primary" icon="el-icon-edit" @click="onSubmit('form')">下一步：确认信息
+        <el-button  class="onSubmit"  ref="submit" type="primary" icon="el-icon-edit" @click="onSubmit('form')">下一步：确认信息
         </el-button>
       </el-form-item>
     </el-form>
