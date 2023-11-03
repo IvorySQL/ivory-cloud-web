@@ -35,4 +35,4 @@ jobs:
     - name: run dev
       run: npm run dev & sleep 30
     - name: Function test
-      run: cypress run
+      run: npm run cypress:run
