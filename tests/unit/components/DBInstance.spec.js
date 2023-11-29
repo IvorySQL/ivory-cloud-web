@@ -127,7 +127,7 @@ describe('DBInstance.vue', () => {
       { "metadata": { "uid": "1", "name": "ivory" } }
     ]
     const select = wrapper.find({ref: 'storageClass'})
-    select.vm.$emit('input', 'highgo')
+    select.vm.$emit('input', 'ivory')
     expect(wrapper.vm.form.storageClass).toBe('ivory')
   })
 
