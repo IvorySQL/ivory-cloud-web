@@ -80,12 +80,12 @@
 
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="数据库引擎" prop="resource">
-              <el-form-item label="安全版" />
+              <el-form-item label="IvorySQL" />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="版本" prop="edition">
-              <el-form-item label="4.5.8" />
+              <el-form-item label="3.0" />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
@@ -683,7 +683,7 @@ export default {
           this.$message({
             dangerouslyUseHTMLString: true,
             type: 'warning',
-            message: '请先配置k8s集群信息！'
+            message: '请先配置K8S集群信息！'
           })
         }
       }).catch(function(error) {
