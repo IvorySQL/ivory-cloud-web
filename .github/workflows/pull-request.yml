@@ -27,13 +27,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm i
+    - run: npm i cypress@12.2.0 --save-dev
     - name: Eslint
       run: npm run lint
     - name: Unit test
       run: npm run test:unit
     - name: run dev
-      run: npm run dev &
-    - name: Wait for 10 seconds
-      run: sleep 10
+      run: npm run dev & sleep 30
     - name: Function test
-      run: cypress run
+      run: npm run cypress:run
