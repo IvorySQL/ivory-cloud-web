@@ -452,7 +452,6 @@ export default {
         renew: false,
         nodenum: 3, // 节点个数
         name: '',
-        // name: 'highgo',
         supply: '',
         availableArea: '',
         edition: 1,

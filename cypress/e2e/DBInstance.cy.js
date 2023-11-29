@@ -20,7 +20,7 @@ describe('DBInstance spec', () => {
     cy.intercept('GET', '**/clusters/*/namespace', {
       statusCode: 200,
       body: [
-        { "metadata": { "name": "highgo" } }
+        { "metadata": { "name": "ivory" } }
       ]
     }).as('getNameSpace')
 
@@ -28,7 +28,7 @@ describe('DBInstance spec', () => {
     cy.intercept('GET', '**/storage-class?clusterId=ef9d1dcfe80f440b9fa67a7ef2fcd30b', {
       statusCode: 200,
       body: [
-        {"metadata": {"uid": "1", "name": "highgo"}}
+        {"metadata": {"uid": "1", "name": "incloud-nfs"}}
       ]
     })
 
@@ -38,7 +38,7 @@ describe('DBInstance spec', () => {
     // 下一步
     cy.wait('@getNameSpace').then(() => {
       // 输入实例名称
-      cy.get('.inputName').type('highgo')
+      cy.get('.inputName').type('ivorysql')
       // 必须点开小眼睛之后才能用.type输入密码
       cy.get('#show-pwd1').click()
       cy.get('#show-pwd2').click()
@@ -50,11 +50,11 @@ describe('DBInstance spec', () => {
     // 判断确认订单页面数据是否正确
     cy.url().should('contain', 'ConfirmOrder')
     cy.get('.el-form-item').contains('集群').next().should('contain.text', 'k8s')
-    cy.get('.el-form-item').contains('命名空间').next().should('contain.text', 'highgo')
+    cy.get('.el-form-item').contains('命名空间').next().should('contain.text', 'ivory')
     cy.get('.el-form-item').contains('实例类型').next().should('contain.text', '单节点')
-    cy.get('.el-form-item').contains('实例名称').next().should('contain.text', 'highgo')
+    cy.get('.el-form-item').contains('实例名称').next().should('contain.text', 'ivorysql')
     cy.get('.el-form-item').contains('性能规格').next().should('contain.text', '1 vCPUs | 1 GB')
-    cy.get('.el-form-item').contains('存储类型').next().should('contain.text', 'highgo')
+    cy.get('.el-form-item').contains('存储类型').next().should('contain.text', 'incloud-nfs')
     cy.get('.el-form-item').contains('存储空间').next().should('contain.text', '5 GB')
 
     // 确认订单

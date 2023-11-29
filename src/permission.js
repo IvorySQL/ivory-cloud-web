@@ -81,7 +81,7 @@ router.beforeEach(async(to, from, next) => {
           await store.dispatch('user/resetToken')
           console.error('================', error)
           // Message.error(error || 'Has Error')
-          next(`/login?redirect=${to.path}`)
+          next(`/UserLogin`)
           NProgress.done()
         }
       }
@@ -101,7 +101,7 @@ router.beforeEach(async(to, from, next) => {
       // fix bug: 用户手动清除 localStorage.XAUTHTOKEN
       // 清除login的信息，并且重置路由
       store.dispatch('user/logout')
-      next(`/login?redirect=${to.path}`)
+      next(`/UserLogin`)
       NProgress.done()
       //  if (!userId) {
       //    next('/login')

@@ -27,19 +27,8 @@
       class="right-menu"
       style="margin-right: 20px;font-weight: 500;font-size: 14px;line-height: 50px;color: #ffffff;"
     >
-      <!-- <span style="margin-right: 20px;cursor:pointer" @click="Usage"><i class="el-icon-document"
-                                                                           style="margin-right: 3px;"></i>使用手册</span> -->
-      <!--      <span style="margin-right: 20px;cursor:pointer">-->
-      <!--        &lt;!&ndash; <a href="../../../Usage.html" target="_blank"> &ndash;&gt;-->
-      <!--        <a :href="globalDocUrl" target="_blank">-->
-      <!--          <i class="el-icon-document" style="margin-right: 1px"></i>-->
-      <!--          使用手册-->
-      <!--        </a>-->
-      <!--      </span>-->
-      <!--      <span style="margin-right: 20px;cursor:pointer" @click="FeedBack"><i class="el-icon-edit-outline"-->
-      <!--                                                                           style="margin-right: 3px;"></i>意见反馈</span>-->
       <span>
-        <a href="https://www.highgo.com/connection.html" target="_blank">
+        <a href="https://github.com/IvorySQL/IvorySQL/tree/master" target="_blank">
           <i class="el-icon-office-building" style="margin-right: 1px" />
           关于我们
         </a>

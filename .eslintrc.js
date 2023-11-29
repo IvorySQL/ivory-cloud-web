@@ -13,8 +13,7 @@ module.exports = {
 
   "globals": {
     disableNative: true,
-    globalShowRegister: true,
-    globalDocUrl: true
+    globalShowRegister: true
   },
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue

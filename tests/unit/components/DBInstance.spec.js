@@ -70,12 +70,12 @@ describe('DBInstance.vue', () => {
       stubs: ['SvgIcon']
     })
     mockAxios.onGet('/clusters/ef9d1dcfe80f440b9fa67a7ef2fcd30b/namespace').reply(200,[
-      { "metadata": { "name": "highgo" } }
+      { "metadata": { "name": "ivory" } }
     ])
     wrapper.vm.form.clusterId = 'ef9d1dcfe80f440b9fa67a7ef2fcd30b'
     wrapper.vm.getNamespace()
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.Namespace[0].metadata.name).toEqual('highgo')
+    expect(wrapper.vm.Namespace[0].metadata.name).toEqual('ivory')
   })
 
   it('选择命名空间', async () => {
@@ -84,13 +84,13 @@ describe('DBInstance.vue', () => {
       stubs: ['SvgIcon']
     })
     wrapper.vm.Namespace = [
-      { "metadata": { "uid": "1", "name": "highgo" } }
+      { "metadata": { "uid": "1", "name": "ivory" } }
     ]
     const select = wrapper.find({ref: 'namespace'})
     // select.vm.$emit('click', '1')
-    select.vm.$emit('input', 'highgo')
+    select.vm.$emit('input', 'ivory')
     // 检查是否更新
-    expect(wrapper.vm.form.namespace).toEqual('highgo')
+    expect(wrapper.vm.form.namespace).toEqual('ivory')
   })
 
   it('选择实例类型',async () => {
@@ -111,11 +111,11 @@ describe('DBInstance.vue', () => {
       stubs: ['SvgIcon']
     })
     mockAxios.onGet('/storage-class').reply(200,[{
-        "metadata": {"name": "highgo"}
+        "metadata": {"name": "ivory"}
       }])
     wrapper.vm.getStorageClass()
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.form.storageClass).toEqual('highgo')
+    expect(wrapper.vm.form.storageClass).toEqual('ivory')
   })
 
   it('选择存储类型', () => {
@@ -124,11 +124,11 @@ describe('DBInstance.vue', () => {
       stubs: ['SvgIcon']
     })
     wrapper.vm.Namespace = [
-      { "metadata": { "uid": "1", "name": "highgo" } }
+      { "metadata": { "uid": "1", "name": "ivory" } }
     ]
     const select = wrapper.find({ref: 'storageClass'})
     select.vm.$emit('input', 'highgo')
-    expect(wrapper.vm.form.storageClass).toBe('highgo')
+    expect(wrapper.vm.form.storageClass).toBe('ivory')
   })
 
   it('下一步', async () => {
