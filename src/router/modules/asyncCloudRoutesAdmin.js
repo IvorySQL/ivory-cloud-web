@@ -21,7 +21,7 @@ export const asyncCloudRoutesAdmin = [
         path: 'index',
         name: 'KubernetesCluster',
         component: () => import('@/views/CloudNative/DataStorageServer'),
-        meta: { title: 'K8s集群管理', icon: 'el-icon-toilet-paper' }
+        meta: { title: 'K8S集群管理', icon: 'el-icon-toilet-paper' }
       }
     ]
   }

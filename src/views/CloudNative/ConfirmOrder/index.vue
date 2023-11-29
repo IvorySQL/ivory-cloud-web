@@ -88,7 +88,7 @@
         </div>
 
         <el-form-item>
-          <el-button type="primary" :loading="loading" @click="onSubmit">确定</el-button>
+          <el-button  class="onSubmit" type="primary" :loading="loading" @click="onSubmit">确定</el-button>
           <el-button :disabled="loading" @click="onCancel">上一步</el-button>
         </el-form-item>
       </el-form>

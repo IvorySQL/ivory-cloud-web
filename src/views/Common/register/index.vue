@@ -8,7 +8,7 @@
       label-position="left"
       class="register-form"
     >
-      <img src="src/img/logo-hgcloud-blue.png" alt="logo" class="img-login">
+      <img src="@/img/logo-hgcloud-blue.png" alt="logo" class="img-login">
       <p id="logo-title">瀚高云平台</p>
       <div class="title-container">
         <h3 class="title">Register</h3>

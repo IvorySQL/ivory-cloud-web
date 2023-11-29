@@ -43,6 +43,8 @@
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="集群" prop="clusterName">
               <el-select
+                ref="clusterName"
+                class="selectCluster"
                 v-model="form.clusterName"
                 placeholder="请选择所在集群"
                 size="small"
@@ -65,7 +67,7 @@
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="命名空间" prop="namespace">
-              <el-select v-model="form.namespace" placeholder="请选择命名空间" size="small">
+              <el-select ref="namespace" v-model="form.namespace" placeholder="请选择命名空间" size="small">
                 <el-option
                   v-for="item in Namespace"
                   :key="item.metadata.uid"
@@ -78,18 +80,19 @@
 
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="数据库引擎" prop="resource">
-              <el-form-item label="安全版" />
+              <el-form-item label="IvorySQL" />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="版本" prop="edition">
-              <el-form-item label="4.5.8" />
+              <el-form-item label="3.0" />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="实例类型" prop="type">
               <el-radio
                 v-for="item in typelist"
+                ref="typeChange"
                 :key="item.id"
                 v-model="form.type"
                 :label="item.id"
@@ -118,7 +121,7 @@
         <el-row>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="实例名称" prop="name">
-              <el-input v-model="form.name" size="small">
+              <el-input class="inputName" v-model="form.name" size="small">
                 <span slot="suffix">
                   <el-tooltip class="nameHelp" effect="dark" content="1-8个字符，只能以小写英文字母开头，名称只能包含小写英文字母、数字、“-”。">
                     <i class="el-icon-question" />
@@ -132,15 +135,15 @@
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-tooltip v-show="form.isRestore" class="restoreHelp" effect="dark" content="请输入此次备份时的数据库密码。">
               <el-form-item label="密码" prop="pass">
-                <el-input :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
+                <el-input  class="inputPwd" :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
                 <span class="show-pwd" @click="showPwd"><svg-icon
                   :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
                 /></span>
               </el-form-item>
             </el-tooltip>
             <el-form-item v-show="!form.isRestore" label="密码" prop="pass">
-              <el-input :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
-              <span class="show-pwd" @click="showPwd"><svg-icon
+              <el-input id="inputPwd" :key="passwordType" v-model="form.pass" :type="passwordType" size="small" />
+              <span id="show-pwd1" class="show-pwd" @click="showPwd"><svg-icon
                 :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
               /></span>
             </el-form-item>
@@ -149,8 +152,8 @@
         <el-row>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="确认密码" prop="checkPass">
-              <el-input :key="passwordType2" v-model="form.checkPass" :type="passwordType2" size="small" />
-              <span class="show-pwd" @click="showPwd2"><svg-icon
+              <el-input  id="confirmPdw" :key="passwordType2" v-model="form.checkPass" :type="passwordType2" size="small" />
+              <span  id="show-pwd2" class="show-pwd" @click="showPwd2"><svg-icon
                 :icon-class="passwordType2 === 'password' ? 'eye' : 'eye-open'"
               /></span>
             </el-form-item>
@@ -196,7 +199,7 @@
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="存储类型" prop="storageClass">
-              <el-select v-model="form.storageClass" placeholder="请选择存储类型" size="small">
+              <el-select ref="storageClass" v-model="form.storageClass" placeholder="请选择存储类型" size="small">
                 <el-option
                   v-for="item in StorageClass"
                   :key="item.metadata.id"
@@ -249,7 +252,7 @@
         </el-row>
       </div>
       <el-form-item>
-        <el-button type="primary" icon="el-icon-edit" @click="onSubmit('form')">下一步：确认信息
+        <el-button  class="onSubmit"  ref="submit" type="primary" icon="el-icon-edit" @click="onSubmit('form')">下一步：确认信息
         </el-button>
       </el-form-item>
     </el-form>
@@ -335,6 +338,7 @@
 </style>
 <script>
 export default {
+  name: 'DBInstance',
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -448,7 +452,6 @@ export default {
         renew: false,
         nodenum: 3, // 节点个数
         name: '',
-        // name: 'highgo',
         supply: '',
         availableArea: '',
         edition: 1,
@@ -679,7 +682,7 @@ export default {
           this.$message({
             dangerouslyUseHTMLString: true,
             type: 'warning',
-            message: '请先配置k8s集群信息！'
+            message: '请先配置K8S集群信息！'
           })
         }
       }).catch(function(error) {
@@ -690,7 +693,6 @@ export default {
     getNamespace(event) {
       const _this = this
       this.axios.get('/clusters/' + _this.form.clusterId + '/namespace').then(res => {
-        console.log(res)
         if (res.data && res.status === 200) {
           _this.Namespace = res.data
           // for (let i = 0; i < _this.Namespace.length; i++) {
@@ -1065,15 +1067,8 @@ export default {
           _this.form.clusterId = element.clusterId
         }
       })
-      console.log(this.form.clusterId, '=================')
       _this.getNamespace(event)
     },
-    // changeNamespace() {
-    //   console.log(this.form.namespace)
-    // },
-    // changeStorageClass() {
-    //
-    // },
     // 切换计费方式
     changeMethod() {
       const event = 'change'

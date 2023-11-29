@@ -20,6 +20,7 @@
         <el-input
           ref="username"
           v-model.trim="loginForm.username"
+          class="username"
           placeholder="Username"
           name="username"
           type="text"
@@ -35,6 +36,7 @@
           :key="passwordType"
           ref="password"
           v-model.trim="loginForm.password"
+          class="password"
           :type="passwordType"
           placeholder="Password"
           name="password"
