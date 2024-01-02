@@ -80,12 +80,12 @@
 
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="数据库引擎" prop="resource">
-              <el-form-item label="IvorySQL" />
+              <el-form-item :label=form.dbtype />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
             <el-form-item label="版本" prop="edition">
-              <el-form-item label="3.0" />
+              <el-form-item :label=form.dbversion />
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="20" :lg="12" :xl="8">
@@ -356,7 +356,7 @@ export default {
           // var reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
           // var reg = /(?!.*\s)(?!^[\u4e00-\u9fa5]+$)(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,16}$/
           if (!reg.test(value)) {
-            callback(new Error('安全版密码需不少于八位且包含大小写字母和数字和特殊字符！'))
+            callback(new Error('密码需不少于八位且包含大小写字母和数字和特殊字符！'))
           }
         }
         callback()
@@ -459,7 +459,12 @@ export default {
         type: 1,
         backupFlag: false,
         resource: 1,
-        resourceName: '安全版',
+        // eslint-disable-next-line no-undef
+        resourceName: dbtype,
+        // eslint-disable-next-line no-undef
+        dbtype: dbtype,
+        // eslint-disable-next-line no-undef
+        dbversion: dbversion,
         desc: '',
         cpuId: 2,
         osId: 1,
@@ -545,8 +550,10 @@ export default {
       ChargingMode: [],
       Duration: [],
       Provider: [],
-      Product: [{ id: 1, name: '安全版' }],
-      Version: [{ id: 1, name: '4.5.8' }],
+      // eslint-disable-next-line no-undef
+      Product: [{ id: 1, name: dbtype }],
+      // eslint-disable-next-line no-undef
+      Version: [{ id: 1, name: dbversion }],
       DeployMode: [{ id: 1, name: 'ALONE' }, { id: 2, name: 'HA' }],
       cpu: [],
       os: [],

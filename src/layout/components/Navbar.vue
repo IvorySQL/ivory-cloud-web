@@ -106,7 +106,7 @@ export default {
         // 清除role
         // this.$store.dispatch('user/removeRoles')
 
-        this.$router.push({ path: '/login' })
+        this.$router.push({ path: '/Userlogin' })
         //    this.$router.push("/login");
       }).catch((error) => {
         this.$message.error(error)

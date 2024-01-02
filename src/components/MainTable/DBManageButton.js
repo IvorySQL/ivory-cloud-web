@@ -9,7 +9,7 @@ export default function handleCommand(command) {
     this.axios.get('/instances/' + instanceId + '/hgadmin', {}).then(res => {
       _this.loading = false
       if (res.status === 200) {
-        window.open('https://' + res.data.message, '_blank')
+        window.open('http://' + res.data.message, '_blank')
       } else {
         _this.$message.error(res.data.message)
       }
