@@ -191,6 +191,12 @@ export default {
     var confirmData = sessionStorage.getItem('confirmData')
     this.confirmData = JSON.parse(confirmData)
   },
+  computed: {
+    dbtype() {
+      // eslint-disable-next-line no-undef
+      return dbtype
+    }
+  },
   methods: {
     onSubmit() {
       const _this = this
@@ -210,8 +216,9 @@ export default {
               _this.$message.success('数据库恢复中，请耐心等待')
               _this.$router.push({ path: '/nativeCloud/DBManage/index' })
             } else {
-              _this.$message.error(response.data.message)
-              _this.$router.push({ path: '/nativeCloud/DBInstance/index', query: { flag: _this.flag }})
+              _this.$router.push({ path: '/nativeCloud/DBManage/index' })
+              // _this.$message.error(response.data.message)
+              // _this.$router.push({ path: '/nativeCloud/DBInstance/index', query: { flag: _this.flag }})
             }
           }).catch(function(error) {
             _this.$message.error(error)
