@@ -30,7 +30,7 @@
           <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
             <el-form-item label="数据库引擎" prop="colProduct">
               <!--              {{ form.product }}-->
-              安全版
+              {{ dbtype }}
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
@@ -298,6 +298,12 @@ export default {
     this.flag = this.$route.query.flag
     this.getTableList()
     // this.getInstanceEvent();
+  },
+  computed: {
+    dbtype() {
+      // eslint-disable-next-line no-undef
+      return dbtype
+    }
   },
   methods: {
     getStatus() {
