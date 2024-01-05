@@ -27,7 +27,67 @@ export function getPlaceholder(row) {
     _this.placeholder = '[' + row.min + 'MB-' + row.max + 'MB]'
   }
 }
-
+export function validateInput(row) {
+  // console.log(row.targetValue)
+  const targetValue = row.targetValue
+  if (typeof targetValue !== 'undefined') {
+    if (targetValue === '' || targetValue === null || targetValue === undefined) {
+      return false
+    } else {
+      if (row.paramType === 'INTEGER') {
+        const reg = /^[0-9]+$/
+        if (!reg.test(targetValue)) {
+          this.$message.error('只允许输入数字！')
+          this.$set(row, 'isEdit', true)
+          return false
+        } else {
+          if (parseInt(targetValue) < parseInt(row.min) || parseInt(targetValue) > parseInt(row.max)) {
+            this.$message.error('可输入的区间范围为[' + row.min + '-' + row.max + ']！')
+            this.$set(row, 'isEdit', true)
+            return false
+          } else {
+            return true
+          }
+        }
+      } else if (row.paramType === 'ENUM') {
+        const enumValue = row.enumValue
+        const reg = enumValue.split(',')
+        let flag = false
+        // console.log(reg)
+        for (let i = 0; i < reg.length; i++) {
+          if (row.targetValue === reg[i]) {
+            flag = true
+          }
+        }
+        if (!flag) {
+          this.$message.error('只允许输入' + enumValue + '!')
+          this.$set(row, 'isEdit', true)
+        }
+        return flag
+      } else {
+        const reg = new RegExp(row.rule)
+        if (!reg.test(targetValue)) {
+          this.$message.error('输入值不符合规范，请检查单位并且删除不必要的内容！')
+          this.$set(row, 'isEdit', true)
+          return false
+        } else {
+          const splitArray = targetValue.split('MB')
+          const splitValue = splitArray[0]
+          // console.log(splitValue)
+          if (parseInt(splitValue) < parseInt(row.min) || parseInt(splitValue) > parseInt(row.max)) {
+            this.$message.error('可输入的区间范围为[' + row.min + 'MB-' + row.max + 'MB]！')
+            this.$set(row, 'isEdit', true)
+            return false
+          } else {
+            return true
+          }
+        }
+      }
+    }
+  } else {
+    return false
+  }
+}
 export function modifyParams() {
   const _this = this
   // console.log(_this.allowCommit)
