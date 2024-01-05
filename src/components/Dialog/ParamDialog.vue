@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import { resetInput, modifyParams, handleClick, getPlaceholder } from '@/views/CloudNative/ParameterModuleManage/Parameter'
+import { resetInput, modifyParams, validateInput, handleClick, getPlaceholder } from '@/views/CloudNative/ParameterModuleManage/Parameter'
 export default {
   name: 'ParamDialog',
   props: {
@@ -128,6 +128,7 @@ export default {
     resetInput,
     modifyParams,
     handleClick,
+    validateInput,
     getPlaceholder
   }
 }
