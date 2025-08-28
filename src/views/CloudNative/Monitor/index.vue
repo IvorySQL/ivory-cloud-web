@@ -129,9 +129,9 @@ export default {
     },
     setTimer() {
       var _this = this
-      _this.clock = window.setInterval(() => {
+     // _this.clock = window.setInterval(() => {
         _this.getMonitorUrlTimer()
-      }, 10000)
+     // }, 10000)
     },
     getMonitorUrlTimer() {
       const _this = this

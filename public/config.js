@@ -7,4 +7,4 @@ globalShowRegister = true
 disableNative = false
 // 数据库类型
 dbtype = "IvorySQL"
-dbversion = "3.0"
+dbversion = "4.5"
