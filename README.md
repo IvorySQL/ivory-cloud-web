@@ -1,65 +1,66 @@
-# 安装
+# Installation
 
-## 前期准备
+## Installation instructions
 
-ivory-cloud-web作为一个开源前端项目，开发过程中需要在本地安装git、node等。
+As an open-source frontend project, ivory-cloud-web requires the local installation of git, node, etc., during the development process.
 
-fork开源云平台后端仓库到自己的github账号，然后clone到自己本地，例如：
+Fork the frontend repository of the open-source cloud platform to your own GitHub account, then clone it to your local machine, for example:
 
 ```sh
 YOUR_GITHUB_UN="<your GitHub username>"
 git clone "git@github.com:${YOUR_GITHUB_UN}/ivory-cloud-web.git"
 ```
 
-进入项目根目录：
+Enter the project root directory:
 
 ```
 cd ivory-cloud-web
 ```
 
-安装依赖：
+Install dependencies:
 
 ```
 npm install
 ```
 
-## 本地运行
 
-### 配置后端接口地址
+## Run locally
+### Configure the backend interface address
 
-修改`public`目录下的config.js：
+
+Modify the config.js under the`public`directory:
 
 ```
-PLATFROM_CONFIG.baseUrl = "http://127.0.0.1:8081/cloudapi/api/v1"
+PLATFROM_CONFIG.baseUrl = "http://127.0.0.1:8088/cloudapi/api/v1"
 ```
 
-将baseUrl中的IP修改为后端项目服务器的IP地址，开源云平台后端服务默认端口为8081，如果后端服务端口进行了变更，baseUrl也应根据实际进行相应的修改。
+Change the IP in baseUrl to the IP address of the backend project server. The default port is 8088. If the port has been changed, the baseUrl should also be modified accordingly based on the actual situation.
 
-### 运行项目
+### Run the project
 
-进入项目根目录执行：
+Enter the project root directory and execute:
 
 ```
 npm run dev
 ```
 
-等项目运行成功后可以使用浏览器访问http://localhost:9528。
+After the project runs successfully, you can access  `http://localhost:9528`  using a browser.
 
-## 前端部署
+## Deployment
 
-### 编译打包
+### Compile and build
 
-进入项目根目录执行：
+Enter the project root directory and execute:
 
 ```
 npm run build:prod
 ```
 
-打包完成后可以在项目根目录下发现`dist`目录，将`dist`放入服务器的`/home/cloud/web`目录下，`/home/cloud/web`允许自定义。
+After the packaging is completed, you can find the `dist` directory in the root directory of the project. Place the `dist` directory into the `/home/cloud/web` directory of the server. `/home/cloud/web` can be customized.
+  
+### Deploy frontend projects via nginx
 
-### 通过nginx部署前端项目
-
-首先，请确保服务器已经安装了nginx。编辑nginx的配置文件nginx.conf，修改监听的端口和网站根目录，可以参考以下配置：
+First, please ensure that nginx is installed on the server. Edit the nginx configuration file `nginx.conf` , modify the listening port and the website root directory, and you can refer to the following configuration:
 
 ```
 server {
@@ -76,10 +77,10 @@ server {
 }
 ```
 
-重启nginx使更改生效，现在可以使用浏览器访问前端应用：
+Restart nginx to make the changes take effect. Now you can access the frontend application using a browser:
 
 ```
 http://your_server:9104
 ```
 
-确保替换 `your_server` 为您的实际IP地址。
+Make sure to replace `your_server` with your actual IP address.
