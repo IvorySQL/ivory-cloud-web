@@ -4,7 +4,7 @@
 
 As an open-source frontend project, ivory-cloud-web requires the local installation of git, node, etc., during the development process.
 
-Fork the fronted repository of the open-source cloud platform to your own GitHub account, then clone it to your local machine, for example:
+Fork the frontend repository of the open-source cloud platform to your own GitHub account, then clone it to your local machine, for example:
 
 ```sh
 YOUR_GITHUB_UN="<your GitHub username>"
