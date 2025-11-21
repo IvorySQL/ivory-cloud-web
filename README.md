@@ -53,7 +53,7 @@ After the project runs successfully, you can access  `http://localhost:9528`  us
 Enter the project root directory and execute:
 
 ```
-npm run build:prod
+NODE_OPTIONS="--openssl-legacy-provider" npm run build:prod
 ```
 
 After the packaging is completed, you can find the `dist` directory in the root directory of the project. Place the `dist` directory into the `/home/cloud/web` directory of the server. `/home/cloud/web` can be customized.
