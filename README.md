@@ -1,4 +1,8 @@
 # Installation
+## Prerequisites
+- Node 18
+- IvorySQL 5.0
+- Kubernetes 1.23 (Must have default storage class)
 
 ## Installation instructions
 
@@ -11,6 +15,10 @@ YOUR_GITHUB_UN="<your GitHub username>"
 git clone "git@github.com:${YOUR_GITHUB_UN}/ivory-cloud-web.git"
 ```
 
+
+## Deployment
+
+### Compile and build
 Enter the project root directory:
 
 ```
@@ -22,27 +30,7 @@ Install dependencies:
 ```
 npm install
 ```
-
-
-## Run locally
-### Configure the backend interface address
-
-
-Modify the config.js under the`public`directory:
-
-```
-PLATFROM_CONFIG.baseUrl = "http://127.0.0.1:8081/cloudapi/api/v1"
-```
-
-Change the IP in baseUrl to the IP address of the backend project server. The default port is 8081. If the port has been changed, the baseUrl should also be modified accordingly based on the actual situation.
-
-
-## Deployment
-
-### Compile and build
-
-Enter the project root directory and execute:
-
+Build
 ```
 NODE_OPTIONS="--openssl-legacy-provider" npm run build:prod
 ```
@@ -56,7 +44,7 @@ First, please ensure that nginx is installed on the server. Edit the nginx confi
 ```
 server {
         listen       9104;
-        server_name  localhost;
+        server_name  127.0.0.1;
         location / {
             root   /home/cloud/web/dist;
             index  index.html index.htm;
