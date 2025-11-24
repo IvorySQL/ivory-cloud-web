@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import imghighgo from '../../../img/logo-ivorysql-cloud.png'
+import imghighgo from '../../../img/logo-IvorySQL.png'
 export default {
   name: 'SidebarLogo',
   props: {
@@ -61,6 +61,7 @@ export default {
       height: 30px;
       vertical-align: middle;
       margin-right: 8px;
+      background-color: #f0f0f0;
     }
 
     & .sidebar-title {
