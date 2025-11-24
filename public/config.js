@@ -1,5 +1,5 @@
 var PLATFROM_CONFIG = {};
-PLATFROM_CONFIG.baseUrl = "http://www.highgocloud.com/cloudapi/api/v1"
+PLATFROM_CONFIG.baseUrl = "http://127.0.0.1:8081/cloudapi/api/v1"
 //true: need to show "注册" on login page
 //false: don't  show "注册" on login page
 globalShowRegister = true
