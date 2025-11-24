@@ -2,9 +2,9 @@
 
 ## Installation instructions
 
-As an open-source frontend project, ivory-cloud-web requires the local installation of git, node, etc., during the development process.
+As an open-source frontend project, ivory-cloud-web requires the local installation of git, node18, etc., during the development process.
 
-Fork the frontend repository of the open-source cloud platform to your own GitHub account, then clone it to your local machine, for example:
+Fork the frontend repository of the open-source cloud platform to your own GitHub account, then clone it to your linux machine, for example:
 
 ```sh
 YOUR_GITHUB_UN="<your GitHub username>"
@@ -31,10 +31,10 @@ npm install
 Modify the config.js under the`public`directory:
 
 ```
-PLATFROM_CONFIG.baseUrl = "http://127.0.0.1:8088/cloudapi/api/v1"
+PLATFROM_CONFIG.baseUrl = "http://127.0.0.1:8081/cloudapi/api/v1"
 ```
 
-Change the IP in baseUrl to the IP address of the backend project server. The default port is 8088. If the port has been changed, the baseUrl should also be modified accordingly based on the actual situation.
+Change the IP in baseUrl to the IP address of the backend project server. The default port is 8081. If the port has been changed, the baseUrl should also be modified accordingly based on the actual situation.
 
 ### Run the project
 
