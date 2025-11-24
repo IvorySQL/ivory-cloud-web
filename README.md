@@ -1,4 +1,4 @@
-# Installation
+<img width="1285" height="771" alt="image" src="https://github.com/user-attachments/assets/8928f465-be07-4798-956c-4791c53fb092" /># Installation
 ## Prerequisites
 - Node 18
 - IvorySQL 5.0
@@ -41,6 +41,7 @@ After the packaging is completed, you can find the `dist` directory in the root 
 ### Deploy frontend projects via nginx
 
 First, please ensure that nginx is installed on the server. Edit the nginx configuration file `nginx.conf` , modify the listening port and the website root directory, and you can refer to the following configuration:
+Replace the IP with the actual IP of the current server.
 
 ```
 server {
