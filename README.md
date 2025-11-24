@@ -1,4 +1,4 @@
-<img width="1285" height="771" alt="image" src="https://github.com/user-attachments/assets/8928f465-be07-4798-956c-4791c53fb092" /># Installation
+# Installation
 ## Prerequisites
 - Node 18
 - IvorySQL 5.0
