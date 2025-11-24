@@ -31,8 +31,7 @@ Install dependencies:
 npm install
 ```
 Build
-```
-$env:NODE_OPTIONS="--openssl-legacy-provider" 
+``` 
 npm run build:prod
 ```
 
