@@ -32,7 +32,8 @@ npm install
 ```
 Build
 ```
-NODE_OPTIONS="--openssl-legacy-provider" npm run build:prod
+$env:NODE_OPTIONS="--openssl-legacy-provider" 
+npm run build:prod
 ```
 
 After the packaging is completed, you can find the `dist` directory in the root directory of the project. Place the `dist` directory into the `/opt/cloud/web` directory of the server. `/opt/cloud/web` can be customized.
