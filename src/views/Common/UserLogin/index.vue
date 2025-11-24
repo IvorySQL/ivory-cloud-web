@@ -413,11 +413,11 @@ $light_gray: #eee;
   .img-login {
     padding: 0;
     width: 105px;
-    height: 12px;
+    height: 40px;
   }
 
   #logo-title {
-    width: 73px;
+    width: 110px;
     height: 14px;
     font-size: 14px;
     font-family: Microsoft YaHei;

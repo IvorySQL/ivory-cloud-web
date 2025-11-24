@@ -8,7 +8,7 @@
         style="margin-right: 10px"
       >
         <el-option label="Postgresql" value="1" />
-        <el-option label="Highgo DB" value="2" />
+        <el-option label="IvorySQL DB" value="2" />
       </el-select>
       <el-input
         v-model="keyword"
