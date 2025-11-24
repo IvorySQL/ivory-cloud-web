@@ -8,8 +8,8 @@
       label-position="left"
       class="login-form"
     >
-      <img src="@/img/logo-hgcloud-blue.png" alt="logo" class="img-login">
-      <p id="logo-title">瀚高云平台</p>
+      <img src="@/img/logo-ivorysql-cloud.png" alt="logo" class="img-login">
+      <p id="logo-title">IvorySQL云平台 </p>
       <div class="title-container">
         <h3 class="title">Login</h3>
       </div>

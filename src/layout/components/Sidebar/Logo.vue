@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import imghighgo from '../../../img/favicon_inspur.png'
+import imghighgo from '../../../img/logo-ivorysql-cloud.png'
 export default {
   name: 'SidebarLogo',
   props: {
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: '瀚高基础软件',
+      title: 'IvorySQL',
       logo: imghighgo
       // logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
     }

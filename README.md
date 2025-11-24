@@ -2,7 +2,7 @@
 
 ## Installation instructions
 
-As an open-source frontend project, ivory-cloud-web requires the local installation of git, node18, etc., during the development process.
+As an open-source frontend project, ivory-cloud-web requires the local installation of git, node, etc., during the development process.
 
 Fork the frontend repository of the open-source cloud platform to your own GitHub account, then clone it to your linux machine, for example:
 
