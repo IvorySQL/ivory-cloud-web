@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'HighGo',
+  title: 'IvorySQL Cloud',
 
   /**
    * @type {boolean} true | false
