@@ -1,7 +1,7 @@
 # Installation
 ## Prerequisites
 - Node 18
-- IvorySQL 5.0
+- IvorySQL 5.1
 - Kubernetes 1.23 (Must have default storage class)
 
 ## Installation instructions
