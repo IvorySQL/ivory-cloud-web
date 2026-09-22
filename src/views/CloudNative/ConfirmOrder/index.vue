@@ -221,6 +221,7 @@ export default {
               // _this.$router.push({ path: '/nativeCloud/DBInstance/index', query: { flag: _this.flag }})
             }
           }).catch(function(error) {
+            _this.loading = false
             _this.$message.error(error)
           })
       } else {
@@ -237,6 +238,7 @@ export default {
               _this.$router.push({ path: '/nativeCloud/DBInstance/index', query: { flag: _this.flag }})
             }
           }).catch(function(error) {
+            _this.loading = false
             _this.$message.error(error)
           })
       }
