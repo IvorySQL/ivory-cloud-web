@@ -233,7 +233,7 @@ export default {
           return false
         }
       }).catch(function(error) {
-        this.$message.error(error)
+        _this.$message.error(error)
         _this.isButtonLoading = false
       })
     },
@@ -268,7 +268,7 @@ export default {
           return false
         }
       }).catch(function(error) {
-        this.$message.error(error)
+        _this.$message.error(error)
         _this.isButtonLoading = false
       })
     },
@@ -322,6 +322,7 @@ export default {
         this.listLoading = false
         _this.list = res.data
       }).catch(function(error) {
+        _this.listLoading = false
         _this.$message.error(error)
       })
     },
