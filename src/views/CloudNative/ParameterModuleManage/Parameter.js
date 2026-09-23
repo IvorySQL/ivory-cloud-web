@@ -97,6 +97,7 @@ export function modifyParams() {
     //     _this.updateParams.push({ 'paramName': _this.parameterList[i].name, 'targetValue': _this.parameterList[i].targetValue })
     //   }
     // }
+    _this.updateParams = []
     _this.parameterList.forEach((item) => {
       if (item.targetValue) {
         _this.updateParams.push({ 'paramName': item.name, 'targetValue': item.targetValue })
