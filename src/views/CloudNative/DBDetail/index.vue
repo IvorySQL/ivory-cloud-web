@@ -385,6 +385,7 @@ export default {
               _this.$message.success('修改实例描述成功')
               _this.modifyDescVisible = false
               _this.descForm.newDesc = description
+              _this.getTableList()
             } else {
               _this.$message.error(res.data.message + '！')
               _this.isButtonLoading = false
@@ -393,7 +394,6 @@ export default {
             _this.$message.error(error)
             _this.isButtonLoading = false
           })
-          setTimeout(() => { _this.getTableList() }, 150)
         } else {
           return false
         }
