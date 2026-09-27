@@ -248,24 +248,28 @@ export default {
           return errorMessage === ''
         })
         // console.log(valid); // true/false
-        if (valid) {
-          _this.getEmailVerification()
+        if (valid && !_this.inProcess) {
           _this.inProcess = true
-          const interval = window.setInterval(function() {
-            if ((_this.totalTime--) <= 0) {
-              _this.totalTime = 120
+          return _this.getEmailVerification().then(sent => {
+            if (!sent) {
               _this.inProcess = false
-              window.clearInterval(interval)
+              return
             }
-            // console.log("倒计时"+_this.totalTime+"s！")
-          }, 1000)
+            const interval = window.setInterval(function() {
+              if ((_this.totalTime--) <= 0) {
+                _this.totalTime = 120
+                _this.inProcess = false
+                window.clearInterval(interval)
+              }
+            }, 1000)
+          })
         }
       })
     },
     getEmailVerification() {
       const _this = this
       // 验证邮箱是否跟注册时的相同
-      this.axios.post('/emailVerificationCode', {
+      return this.axios.post('/emailVerificationCode', {
         userEmail: _this.modifyForm.email,
         userName: _this.modifyForm.username
       }).then(res => {
