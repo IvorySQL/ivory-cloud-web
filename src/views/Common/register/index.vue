@@ -319,26 +319,30 @@ export default {
           return errorMessage === ''
         })
         // console.log(valid); // true/false
-        if (valid) {
+        if (valid && !_this.inProcess) {
           // 判断邮箱是否已经使用
 
-          _this.getEmailVerification()
           _this.inProcess = true
-          const interval = window.setInterval(function() {
-            if ((_this.totalTime--) <= 0) {
-              _this.totalTime = 120
+          return _this.getEmailVerification().then(sent => {
+            if (!sent) {
               _this.inProcess = false
-              window.clearInterval(interval)
+              return
             }
-            // console.log("倒计时"+_this.totalTime+"s！")
-          }, 1000)
+            const interval = window.setInterval(function() {
+              if ((_this.totalTime--) <= 0) {
+                _this.totalTime = 120
+                _this.inProcess = false
+                window.clearInterval(interval)
+              }
+            }, 1000)
+          })
         }
       })
     },
     getEmailVerification() {
       const _this = this
       // 验证邮箱是否跟注册时的相同
-      this.axios.post('/emailVerificationCodeForRegister', {
+      return this.axios.post('/emailVerificationCodeForRegister', {
         userEmail: _this.registerForm.email,
         userName: _this.registerForm.username
       }).then(res => {
@@ -347,7 +351,6 @@ export default {
             _this.$message.success('验证码已发送，请前往邮箱查看！')
             return true
           } else {
-            _this.inProcess = false
             _this.$message.error(res.data.message)
             return false
           }
