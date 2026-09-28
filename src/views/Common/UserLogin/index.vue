@@ -209,7 +209,11 @@ export default {
           // eslint-disable-next-line no-unused-vars
           const password_md5 = this.$md5(this.loginForm.password + 'highgo')
           this.axios({
-            url: '/login?username=' + this.loginForm.username + '&password=' + this.loginForm.password,
+            url: '/login',
+            params: {
+              username: this.loginForm.username,
+              password: this.loginForm.password
+            },
             method: 'post'
             // data: {
             //   userName: this.loginForm.username,
