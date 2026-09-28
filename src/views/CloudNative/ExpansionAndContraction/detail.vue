@@ -215,7 +215,8 @@ export default {
           }
         })
         .catch(function(error) {
-          this.$message.error(error)
+          _this.submitStatus = false
+          _this.$message.error(error)
         })
     },
     getTableList() {
