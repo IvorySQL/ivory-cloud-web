@@ -10,7 +10,7 @@
       title="选择集群"
       :visible.sync="isClusterNotChecked"
       :close-on-click-modal="false"
-      @close="closeConfigMonitor()"
+      :before-close="closeConfigMonitor"
     >
       <el-form ref="monitorForm" :model="monitorForm" :label-width="formLabelWidth" :rules="rules" label-position="right">
         <el-col style="padding-left: 40px">
