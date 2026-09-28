@@ -70,6 +70,7 @@ export default {
     return {
       labelPosition: 'right',
       backupVisible: false,
+      backupRequestId: 0,
       rules: {
         name: [
           { required: true, message: '请输入备份名称', trigger: 'blur' }

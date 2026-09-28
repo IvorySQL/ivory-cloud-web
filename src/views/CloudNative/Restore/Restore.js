@@ -1,21 +1,23 @@
 export function getBackupLists(row) {
   const _this = this
   const instanceId = row.id
-  const instanceName = row.name
-  const clusterName = row.clusterName
-  const namespace = row.namespace
+  const requestId = (_this.backupRequestId || 0) + 1
+  _this.backupRequestId = requestId
+  _this.backupLists = []
+  _this.instanceId = instanceId
+  _this.instanceName = row.name
+  _this.clusterName = row.clusterName
+  _this.namespace = row.namespace
   _this.restoreVisible = true
   _this.clusterId = row.clusterId
   this.axios.get('/instances/' + instanceId + '/backups/1/1000?filter=', {})
     .then((response) => {
+      if (!_this.restoreVisible || requestId !== _this.backupRequestId) return
       _this.listLoading = false
       _this.backupLists = response.data.data
-      _this.instanceId = instanceId
-      _this.instanceName = instanceName
-      _this.clusterName = clusterName
-      _this.namespace = namespace
     })
     .catch((error) => {
+      if (!_this.restoreVisible || requestId !== _this.backupRequestId) return
       this.$message.error(error)
     })
 }
