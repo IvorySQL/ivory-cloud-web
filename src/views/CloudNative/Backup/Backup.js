@@ -20,6 +20,7 @@ export function getBackupInfo(row) {
  */
 export function createBackup(formName) {
   const _this = this
+  const requestId = ++_this.backupRequestId
   this.$refs[`${formName}`].validate((valid) => {
     if (valid) {
       this.$confirm('请牢记此次备份的数据库系统管理员密码，一旦忘记，恢复后将无法登录数据库', '提示', {
@@ -28,6 +29,7 @@ export function createBackup(formName) {
         closeOnClickModal: false,
         type: 'warning'
       }).then(() => {
+        if (requestId !== _this.backupRequestId) return
         _this.isButtonLoading = true
         this.axios.post('/instances/' + _this.instanceId + '/backups',
           {
@@ -35,6 +37,7 @@ export function createBackup(formName) {
             'name': _this.backupForm.name
           },
           { headers: { 'Content-Type': 'application/json; charset=UTF-8' }}).then(res => {
+          if (requestId !== _this.backupRequestId) return
           if (res.data.status === 'PROCESSING') {
             _this.$message.success('下发指令成功，正在备份中...')
             setTimeout(() => { _this.$parent.getTableList() }, 300)
@@ -44,6 +47,7 @@ export function createBackup(formName) {
             _this.isButtonLoading = false
           }
         }).catch(function(error) {
+          if (requestId !== _this.backupRequestId) return
           _this.$message.error(error)
           _this.isButtonLoading = false
         })
@@ -61,6 +65,7 @@ export function createBackup(formName) {
  */
 export function resetForm(formName) {
   const _this = this
+  _this.backupRequestId++
   _this.$refs[`${formName}`].resetFields()
   _this.$emit('update:visible', false)
   _this.$emit('update:instanceId', '')
