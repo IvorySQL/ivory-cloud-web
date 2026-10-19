@@ -63,15 +63,15 @@
       <el-table-column align="center" prop="network" label="地址" width="130">
         <template slot-scope="scope">
           <span>
-            {{ scope.row.network === null || scope.row.network.size === 0
-              ? '' : scope.row.network[0].nodeIp }}
+            {{ scope.row.network && scope.row.network.length > 0
+              ? scope.row.network[0].nodeIp : '' }}
           </span>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="network" label="端口">
         <template slot-scope="scope">
-          <span>{{ scope.row.network === null || scope.row.network.size === 0
-            ? '' : scope.row.network[0].nodePort }}</span>
+          <span>{{ scope.row.network && scope.row.network.length > 0
+            ? scope.row.network[0].nodePort : '' }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="创建时间" width="190">
