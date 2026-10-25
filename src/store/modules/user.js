@@ -98,6 +98,7 @@ const actions = {
   resetToken({ commit }) {
     return new Promise(resolve => {
       removeToken() // must remove  token  first
+      removeLocalstoragesSavedAsLogined()
       commit('RESET_STATE')
       resolve()
     })
