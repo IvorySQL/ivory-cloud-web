@@ -81,7 +81,7 @@
           tabindex="4"
           auto-complete="on"
           size="width: 10px"
-          @keyup.enter.native="handlemodify"
+          @keyup.enter.native="handleRegister"
         />
         <span class="button-container">
           <span
@@ -107,7 +107,7 @@
           v-model.trim="registerForm.verifycode"
           placeholder="Verification"
           class="identifyinput"
-          @keyup.enter.native="handlemodify"
+          @keyup.enter.native="handleRegister"
         />
       </el-form-item>
       <el-form-item prop="cellphone">
