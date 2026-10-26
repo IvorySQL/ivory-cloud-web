@@ -385,10 +385,9 @@ export default {
         callback(new Error('实例名称不能为空！'))
       } else {
         if (value !== '') {
-          const reg = new RegExp('^[A-Za-z\\\u4e00-\\\u9fa5]+[\\\u4e00-\\\u9fa5_0-9A-Za-z._-]{0,7}$')
-          // var reg = /^[A-Za-z\\u4e00-\\u9fa5]+[\\u4e00-\\u9fa5_0-9A-Za-z._-]{0,7}$/
+          const reg = /^[a-z][a-z0-9-]{0,7}$/
           if (!reg.test(value)) {
-            callback(new Error('1-8个字符，只能以小写英文字母开头，名称只能包含小写英文字母、数字、“-”。'))
+            return callback(new Error('1-8个字符，只能以小写英文字母开头，名称只能包含小写英文字母、数字、“-”。'))
           }
         }
         callback()
