@@ -126,6 +126,7 @@ export default {
       list: [],
       listLoading: false,
       dialogFormVisible: false,
+      clusterDialogRevision: 0,
       k8sClusterForm: {
         serverPass: '',
         clusterName: '',
@@ -179,6 +180,7 @@ export default {
     },
     resetEditForm(form) {
       const _this = this
+      _this.clusterDialogRevision += 1
       _this.editForm.serverPass = form.serverPass
       _this.editForm.clusterName = form.clusterName
       _this.editForm.serverUrl = form.serverUrl
@@ -206,6 +208,7 @@ export default {
     },
     edithandleSure() {
       var _this = this
+      const dialogRevision = _this.clusterDialogRevision
       this.axios({
         url: '/clusters/update',
         method: 'post',
@@ -220,6 +223,7 @@ export default {
           'clusterId': _this.editForm.clusterId
         }
       }).then((res) => {
+        if (dialogRevision !== _this.clusterDialogRevision) return
         if (res.status === 200) {
           this.$message.success('下发指令成功，正在修改中...')
           _this.dialogFormVisible = false
@@ -233,12 +237,14 @@ export default {
           return false
         }
       }).catch(function(error) {
+        if (dialogRevision !== _this.clusterDialogRevision) return
         this.$message.error(error)
         _this.isButtonLoading = false
       })
     },
     addhandleSure() {
       var _this = this
+      const dialogRevision = _this.clusterDialogRevision
       _this.viewFlag = false
       _this.editFlag = false
       _this.addFlag = true
@@ -254,6 +260,7 @@ export default {
           'configPath': _this.editForm.configPath
         }
       }).then((res) => {
+        if (dialogRevision !== _this.clusterDialogRevision) return
         if (res.status === 200) {
           _this.addFlag = false
           _this.viewFlag = false
@@ -268,6 +275,7 @@ export default {
           return false
         }
       }).catch(function(error) {
+        if (dialogRevision !== _this.clusterDialogRevision) return
         this.$message.error(error)
         _this.isButtonLoading = false
       })
