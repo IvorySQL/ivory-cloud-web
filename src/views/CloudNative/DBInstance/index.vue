@@ -564,7 +564,8 @@ export default {
       price: 0,
       Cluster: [],
       Namespace: [],
-      StorageClass: []
+      StorageClass: [],
+      clusterRequestId: 0
     }
   },
   mounted() {
@@ -699,7 +700,9 @@ export default {
     // 获取命名空间
     getNamespace(event) {
       const _this = this
+      const requestId = ++_this.clusterRequestId
       this.axios.get('/clusters/' + _this.form.clusterId + '/namespace').then(res => {
+        if (requestId !== _this.clusterRequestId) return
         if (res.data && res.status === 200) {
           _this.Namespace = res.data
           // for (let i = 0; i < _this.Namespace.length; i++) {
@@ -716,19 +719,21 @@ export default {
           _this.Namespace = []
         }
       }).catch(function(error) {
+        if (requestId !== _this.clusterRequestId) return
         _this.$message.error(error)
         _this.form.namespace = ''
         _this.Namespace = []
       })
-      _this.getStorageClass(event)
+      _this.getStorageClass(event, requestId)
     },
-    getStorageClass(event) {
+    getStorageClass(event, requestId = this.clusterRequestId) {
       const _this = this
       this.axios.get('/storage-class', {
         params: {
           clusterId: _this.form.clusterId
         }
       }).then(res => {
+        if (requestId !== _this.clusterRequestId) return
         if (res.data && res.status === 200) {
           _this.StorageClass = res.data
           // for (let i = 0; i < _this.StorageClass.length; i++) {
@@ -745,6 +750,7 @@ export default {
           _this.StorageClass = []
         }
       }).catch(function(error) {
+        if (requestId !== _this.clusterRequestId) return
         _this.$message.error(error)
         _this.form.storageClass = ''
         _this.StorageClass = []
@@ -1074,6 +1080,10 @@ export default {
           _this.form.clusterId = element.clusterId
         }
       })
+      _this.Namespace = []
+      _this.StorageClass = []
+      _this.form.namespace = ''
+      _this.form.storageClass = ''
       _this.getNamespace(event)
     },
     // 切换计费方式
