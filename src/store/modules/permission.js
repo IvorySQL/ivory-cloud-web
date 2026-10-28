@@ -50,7 +50,7 @@ const mutations = {
 const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
-      let accessedRoutes
+      let accessedRoutes = []
       // 普通用户的话，可以看到所有的导航
       // admin 用户，只能看到裸金属服务器，备份服务器
       if (disableNative === false) {
