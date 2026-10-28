@@ -396,10 +396,10 @@ export default {
     }
     const validateDesc = (rules, value, callback) => {
       if (value !== '') {
-        const reg = new RegExp('^[\\\u4e00-\\\u9fa5_a-zA-Z0-9_.\\\\-]{0,128}$')
+        const reg = /^[\u4e00-\u9fa5_a-zA-Z0-9_.-]{0,128}$/
         // var reg = /^[\\u4e00-\\u9fa5_a-zA-Z0-9_.\\-]{0,128}$/
         if (!reg.test(value)) {
-          callback(new Error('0-128个字符，描述仅包含字母、汉字、数字、"."或"-"。'))
+          return callback(new Error('0-128个字符，描述仅包含字母、汉字、数字、"."或"-"。'))
         }
       }
       callback()
