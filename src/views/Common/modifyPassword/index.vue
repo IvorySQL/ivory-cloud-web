@@ -318,7 +318,7 @@ export default {
       this.$refs.modifyForm.validate((valid) => {
         if (valid) {
           this.axios.post('/updateUserInfo', {
-            userName: _this.modifyForm.username,
+            name: _this.modifyForm.username,
             password: _this.modifyForm.password,
             email: _this.modifyForm.email,
             verificationCode: _this.modifyForm.verifycode
