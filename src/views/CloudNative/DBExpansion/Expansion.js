@@ -5,9 +5,11 @@ export function getStorageInfo(row) {
   const clusterName = row.clusterName
   const namespace = row.namespace
   const _this = this
-  _this.storageForm.storage = ''
+  const storageForm = { storage: '' }
+  _this.storageForm = storageForm
   this.axios.get('/instances/' + instanceId, {})
     .then((response) => {
+      if (!_this.storageExpansionVisible || _this.storageForm !== storageForm) return
       _this.listLoading = false
       _this.storageForm.storage = response.data.storage
       _this.instanceId = instanceId
@@ -16,6 +18,7 @@ export function getStorageInfo(row) {
       _this.namespace = namespace
     })
     .catch((error) => {
+      if (!_this.storageExpansionVisible || _this.storageForm !== storageForm) return
       this.$message.error(error)
     })
 }

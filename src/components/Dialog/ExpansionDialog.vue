@@ -66,8 +66,8 @@ export default {
           if (!reg.test(value)) {
             callback(new Error('只允许输入数字！'))
           }
-          if (value < this.storageForm.storage) {
-            callback(new Error('变更值不能小于原规格！'))
+          if (value <= this.storageForm.storage) {
+            callback(new Error('变更值必须大于原规格！'))
           }
         }
         callback()
