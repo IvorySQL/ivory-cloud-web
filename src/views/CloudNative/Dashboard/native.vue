@@ -117,6 +117,7 @@ export default {
           this.resourceList = response.data
         })
         .catch((error) => {
+          this.loading = false
           this.$message.error(error)
         })
     },
