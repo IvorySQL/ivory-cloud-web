@@ -2,7 +2,7 @@
   <div>
     <el-row style="margin-bottom: 20px; float: right">
       <el-select
-        v-model="cluster.name"
+        v-model="cluster.id"
         placeholder="请选择集群"
         style="width: 160px;margin-right: 10px;"
         size="mini"
@@ -10,9 +10,9 @@
       >
         <el-option
           v-for="item in Cluster"
-          :key="item.clusterName"
+          :key="item.clusterId"
           :label="item.clusterName"
-          :value="item.clusterName"
+          :value="item.clusterId"
         />
       </el-select>
       <el-input
@@ -72,8 +72,8 @@ export default {
       //   }
       // }
       _this.Cluster.forEach((element) => {
-        if (_this.cluster.name === element.clusterName) {
-          _this.cluster.id = element.clusterId
+        if (_this.cluster.id === element.clusterId) {
+          _this.cluster.name = element.clusterName
         }
       })
     },
