@@ -50,6 +50,7 @@ export default {
     return {
       labelPosition: 'right',
       confirmVisible: false,
+      confirmationRevision: 0,
       dialogTitle: '',
       formLabelWidth: '120px',
       size: 'mini',
@@ -60,6 +61,7 @@ export default {
   watch: {
     visible: {
       handler(value) {
+        this.confirmationRevision += 1
         // console.log(value)
         this.confirmVisible = value
       }
@@ -69,10 +71,12 @@ export default {
     resetConfirm,
     doOption(option) {
       const _this = this
+      const revision = ++_this.confirmationRevision
       _this.isButtonLoading = true
       // console.log(option);
       if (option === '重启') {
         this.axios.post('/instances/' + _this.instanceId + '/action/restart', {}).then(res => {
+          if (!_this.confirmVisible || revision !== _this.confirmationRevision) return
           if (res.status === 200) {
             this.$message({
               type: 'success',
@@ -88,12 +92,14 @@ export default {
             _this.isButtonLoading = false
           }
         }).catch(function(error) {
+          if (!_this.confirmVisible || revision !== _this.confirmationRevision) return
           _this.$message.error(error)
           _this.isButtonLoading = false
         })
       }
       if (option === '删除') {
         this.axios.delete('/instances/' + _this.instanceId, {}).then(res => {
+          if (!_this.confirmVisible || revision !== _this.confirmationRevision) return
           if (res.status === 200) {
             this.$message({
               type: 'success',
@@ -109,6 +115,7 @@ export default {
             _this.isButtonLoading = false
           }
         }).catch(function(error) {
+          if (!_this.confirmVisible || revision !== _this.confirmationRevision) return
           _this.$message.error(error)
           _this.isButtonLoading = false
         })
