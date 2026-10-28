@@ -48,7 +48,7 @@
 
       <el-table-column property="isRestoring" label="恢复中" width="100" align="center">
         <template slot-scope="scope">
-          {{ scope.row.isRestoring === 'true' ? '是' : '否' }}
+          {{ scope.row.isRestoring === true ? '是' : '否' }}
         </template>
       </el-table-column>
       <el-table-column property="createdAt" label="创建时间" width="160" align="center">
