@@ -8,7 +8,7 @@ export default function handleCommand(command) {
   if (command.command === 'login') {
     this.axios.get('/instances/' + instanceId + '/hgadmin', {}).then(res => {
       _this.loading = false
-      if (res.status === 200) {
+      if (res.status === 200 && res.data.success === true) {
         window.open('http://' + res.data.message, '_blank')
       } else {
         _this.$message.error(res.data.message)
