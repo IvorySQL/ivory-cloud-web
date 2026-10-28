@@ -1049,6 +1049,7 @@ export default {
       this.form.cpuNum = this.backform.cpuNum
       this.form.memorySize = this.backform.memorySize
       this.form.isRestore = this.backform.isRestore
+      this.form.restoreType = this.backform.restoreType
       this.form.originalInstanceId = this.backform.originalInstanceId
       this.form.originalBackupId = this.backform.originalBackupId
     },
