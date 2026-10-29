@@ -21,12 +21,15 @@ export function getStorageInfo(row) {
 }
 export function expandStorage(updateForm) {
   const _this = this
+  const revision = _this.storageDialogRevision
+  if (_this.isButtonLoading) return
+  _this.isButtonLoading = true
   this.$refs[`${updateForm}`].validate((valid) => {
     if (valid) {
-      _this.isButtonLoading = true
       this.axios.post('/instances/' + _this.instanceId + '/action/storage',
         { 'storageSize': _this.updateForm.storage },
         { headers: { 'Content-Type': 'application/json; charset=UTF-8' }}).then(res => {
+        if (!_this.storageExpansionVisible || revision !== _this.storageDialogRevision) return
         if (res.status === 200) {
           _this.$message.success('下发指令成功，正在修改中...')
           setTimeout(() => { _this.$parent.getTableList() }, 300)
@@ -36,6 +39,7 @@ export function expandStorage(updateForm) {
           _this.isButtonLoading = false
         }
       }).catch(function(error) {
+        if (!_this.storageExpansionVisible || revision !== _this.storageDialogRevision) return
         _this.$message.error(error)
         _this.isButtonLoading = false
       })

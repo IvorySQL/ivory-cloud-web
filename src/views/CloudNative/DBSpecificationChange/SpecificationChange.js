@@ -5,10 +5,11 @@ export function getSpecInfos(row) {
   const clusterName = row.clusterName
   const namespace = row.namespace
   const _this = this
-  _this.specificationForm.cpu = ''
-  _this.specificationForm.memory = ''
+  const specificationForm = { cpu: '', memory: '' }
+  _this.specificationForm = specificationForm
   this.axios.get('/instances/' + instanceId, {})
     .then((response) => {
+      if (!_this.modifySpecVisible || _this.specificationForm !== specificationForm) return
       _this.listLoading = false
       _this.specificationForm.cpu = response.data.cpu
       _this.specificationForm.memory = response.data.memory
@@ -18,11 +19,13 @@ export function getSpecInfos(row) {
       _this.namespace = namespace
     })
     .catch((error) => {
+      if (!_this.modifySpecVisible || _this.specificationForm !== specificationForm) return
       this.$message.error(error)
     })
 }
 export function modifySpecs(updateForm) {
   const _this = this
+  const specificationForm = _this.specificationForm
   this.$refs[`${updateForm}`].validate((valid) => {
     if (valid) {
       _this.isButtonLoading = true
@@ -32,6 +35,7 @@ export function modifySpecs(updateForm) {
           'memory': _this.updateForm.memory
         },
         { headers: { 'Content-Type': 'application/json; charset=UTF-8' }}).then(res => {
+        if (!_this.modifySpecVisible || _this.specificationForm !== specificationForm) return
         if (res.status === 200) {
           _this.$message.success('下发指令成功，正在修改中...')
           setTimeout(() => { _this.$parent.getTableList() }, 300)
@@ -41,6 +45,7 @@ export function modifySpecs(updateForm) {
           _this.isButtonLoading = false
         }
       }).catch(function(error) {
+        if (!_this.modifySpecVisible || _this.specificationForm !== specificationForm) return
         _this.$message.error(error)
         _this.isButtonLoading = false
       })

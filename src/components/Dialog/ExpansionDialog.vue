@@ -38,7 +38,7 @@
       </el-row>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="expandStorage('updateForm')">确 定</el-button>
+      <el-button type="primary" :loading="isButtonLoading" @click="expandStorage('updateForm')">确 定</el-button>
       <el-button @click="storageExpansionVisible = false">取 消</el-button>
     </div>
   </el-dialog>
@@ -83,6 +83,7 @@ export default {
         ]
       },
       storageExpansionVisible: false,
+      storageDialogRevision: 0,
       size: 'mini',
       isButtonLoading: false
     }
@@ -90,6 +91,7 @@ export default {
   watch: {
     visible: {
       handler(value) {
+        this.storageDialogRevision++
         // console.log(value)
         this.storageExpansionVisible = value
       }
