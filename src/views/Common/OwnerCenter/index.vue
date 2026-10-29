@@ -53,7 +53,7 @@
         </span>
         <el-input
           :key="passwordType2"
-          ref="password"
+          ref="confirmpass"
           v-model="registerForm.confirmpass"
           :type="passwordType2"
           placeholder="ConfirmPassword"
