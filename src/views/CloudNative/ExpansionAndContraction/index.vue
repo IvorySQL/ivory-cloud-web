@@ -74,6 +74,7 @@ export default {
   data() {
     return {
       isButtonLoading: false,
+      viewRequestId: 0,
       row: {},
       addFlag: false,
       editFlag: false,
@@ -116,6 +117,7 @@ export default {
   },
   beforeDestroy() {
     var _this = this
+    _this.viewRequestId++
     window.clearInterval(_this.clock)
     _this.clock = null
   },
@@ -146,8 +148,10 @@ export default {
     },
     viewBms(row) {
       var _this = this
+      const requestId = ++_this.viewRequestId
       var userId = localStorage.getItem('userId')
       this.axios.get('/autoscaling/' + userId + '/' + row.clusterId).then(res => {
+        if (requestId !== _this.viewRequestId) return
         console.log(res)
         if (res.status === 200) {
           this.$router.push({
@@ -160,6 +164,7 @@ export default {
           this.$message.warning('尚不能进行自动扩缩容！')
         }
       }).catch(function(error) {
+        if (requestId !== _this.viewRequestId) return
         _this.$message.error(error)
       })
     },

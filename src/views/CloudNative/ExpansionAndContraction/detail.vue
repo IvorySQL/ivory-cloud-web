@@ -152,7 +152,7 @@ export default {
         } else {
           this.$message.error('修改状态失败！')
         }
-      }).catch(function(error) {
+      }).catch((error) => {
         this.$message.error(error)
       })
     },
@@ -215,7 +215,8 @@ export default {
           }
         })
         .catch(function(error) {
-          this.$message.error(error)
+          _this.submitStatus = false
+          _this.$message.error(error)
         })
     },
     getTableList() {
@@ -229,6 +230,7 @@ export default {
         }
         _this.getRuleList()
       }).catch(function(error) {
+        _this.listLoading = false
         _this.$message.error(error)
       })
     },
@@ -240,6 +242,7 @@ export default {
         var list = _this.AddChecked(res.data)
         this.list = list
       }).catch(function(error) {
+        _this.listLoading = false
         _this.$message.error(error)
       })
     },
