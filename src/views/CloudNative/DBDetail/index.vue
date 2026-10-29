@@ -279,6 +279,7 @@ export default {
       loading: true,
       modifyDescVisible: false,
       resetDbUserPassVisible: false,
+      passwordDialogRevision: 0,
       // newDesc: '',
       instanceEvent: {},
       network: [],
@@ -312,6 +313,7 @@ export default {
       // console.log(_this.allowModifyPwd)
     },
     resetForm(formName) {
+      this.passwordDialogRevision++
       this.$refs[`${formName}`].resetFields()
       this.isButtonLoading = false
     },
@@ -342,6 +344,7 @@ export default {
     },
     resetDbUserPass(row) {
       if (this.allowModifyPwd) {
+        this.passwordDialogRevision++
         this.resetDbUserPassVisible = true
         this.isButtonLoading = false
         this.diaform.name = row.name
@@ -350,11 +353,13 @@ export default {
     modifyPass(formName) {
       var _this = this
       const password = _this.diaform.newpassword
+      const revision = _this.passwordDialogRevision
       this.$refs[`${formName}`].validate((valid) => {
         if (valid) {
           _this.isButtonLoading = true
           this.axios.put('/instances/' + _this.list.id + '/users/' + _this.diaform.name +
               '/reset-password', { password }).then(res => {
+            if (revision !== _this.passwordDialogRevision) return
             if (res.status === 200) {
               _this.$message.success('重置密码成功')
               _this.resetDbUserPassVisible = false
@@ -365,6 +370,7 @@ export default {
               _this.isButtonLoading = false
             }
           }).catch(function(error) {
+            if (revision !== _this.passwordDialogRevision) return
             _this.$message.error(error)
             _this.isButtonLoading = false
           })
