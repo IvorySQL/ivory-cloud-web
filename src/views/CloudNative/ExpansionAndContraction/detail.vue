@@ -29,7 +29,7 @@
       </el-table-column>
       <el-table-column label="时间" align="center">
         <template slot-scope="scope">
-          {{ scope.row. threshold }}
+          {{ scope.row.duration }}
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="240">
@@ -53,15 +53,15 @@
         <el-form-item label="名称：" label-width="150px">
           {{ editForm.alertName }}
         </el-form-item>
-        <el-form-item label="阙值：" label-width="150px" prop="duration">
+        <el-form-item label="阙值：" label-width="150px" prop="threshold">
           {{ editForm.type }}&nbsp;{{ getConditionals }}&nbsp;<el-input
-            v-model="editForm.duration"
+            v-model="editForm.threshold"
             style="width: 50px"
             size="small"
           />
         </el-form-item>
-        <el-form-item label="时间：" label-width="150px" prop="threshold">
-          <el-input v-model="editForm.threshold" style="width: 80px" size="small" />
+        <el-form-item label="时间：" label-width="150px" prop="duration">
+          <el-input v-model="editForm.duration" style="width: 80px" size="small" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -108,8 +108,8 @@ export default {
       userId: '',
       clusterId: '',
       rules: {
-        duration: [{ required: true, trigger: 'blur', message: '阙值不能为空！' }],
-        threshold: [{ required: true, trigger: 'blur', message: '时间不能为空！' }]
+        threshold: [{ required: true, trigger: 'blur', message: '阙值不能为空！' }],
+        duration: [{ required: true, trigger: 'blur', message: '时间不能为空！' }]
       },
       form: '',
       ruleitem: {
@@ -178,9 +178,9 @@ export default {
     AddChecked(arr) {
       arr.map(item => {
         if (item.conditionals === 'GT') {
-          item.rule = item.type + '>' + item.duration
+          item.rule = item.type + '>' + item.threshold
         } else if (item.conditionals === 'LT') {
-          item.rule = item.type + '<' + item.duration
+          item.rule = item.type + '<' + item.threshold
         }
       })
       return arr
