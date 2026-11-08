@@ -186,7 +186,7 @@ export default {
         username: [{ required: true, trigger: 'blur', message: '长度在6到16个字符之间！' }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }],
         confirmpass: [{ required: true, trigger: 'blur', validator: validateConfirmPass },
-          { min: 6, max: 16, message: '长度在6到16个字符之间！', trigger: blur }],
+          { min: 6, max: 16, message: '长度在6到16个字符之间！', trigger: 'blur' }],
         email: [{ required: true, trigger: 'blur', validator: validateEmail }],
         verifycode: [{ required: true, trigger: 'blur', validator: validateVerifycode }]
       },
