@@ -6,12 +6,15 @@ export function setTimer() {
 }
 export function getTableList2() {
   var _this = this
+  // Stopping or restarting the interval retires its in-flight requests too.
+  const clock = _this.clock
   let userId = localStorage.getItem('userId')
   if (!userId) {
     userId = localStorage.getItem('userId')
   }
   this.axios.get('/instances/list/' + userId, {})
     .then((response) => {
+      if (clock !== _this.clock) return
       var list = _this.AddChecked(response.data)
       // for (let i = 0; i < list.length; i++) {
       //   if (list[i].children != null) {
@@ -31,6 +34,7 @@ export function getTableList2() {
       _this.list = list
     })
     .catch((error) => {
+      if (clock !== _this.clock) return
       this.$message.error(error)
     })
 }

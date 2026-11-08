@@ -46,6 +46,7 @@ export default {
         filter: ''
       },
       resultList: [],
+      requestId: 0,
       isTimerContinue: false
     }
   },
@@ -79,6 +80,7 @@ export default {
     },
     btnSearch() {
       const _this = this
+      const requestId = ++this.requestId
       _this.searchForm.clusterId = _this.cluster.id
       _this.searchForm.filter = _this.keyword
       this.axios.get('/instances/1/1000', {
@@ -87,17 +89,20 @@ export default {
           filter: _this.searchForm.filter
         }
       }).then((response) => {
+        if (requestId !== this.requestId) return
         _this.listLoading = false
         _this.list = response.data.data
         _this.isTimerContinue = false
         this.$emit('resultList', _this.list, _this.isTimerContinue)
         // console.log(_this.isTimerContinue)
       }).catch((error) => {
+        if (requestId !== this.requestId) return
         this.$message.error(error)
       })
     },
     btnReset() {
       const _this = this
+      const requestId = ++this.requestId
       _this.cluster.id = ''
       _this.cluster.name = ''
       _this.keyword = ''
@@ -108,12 +113,14 @@ export default {
       }
       this.axios.get('/instances/list/' + userId, {})
         .then((response) => {
+          if (requestId !== this.requestId) return
           _this.listLoading = false
           _this.list = response.data
           _this.isTimerContinue = true
           this.$emit('resultList', _this.list, _this.isTimerContinue)
           // console.log(_this.isTimerContinue)
         }).catch((error) => {
+          if (requestId !== this.requestId) return
           this.$message.error(error)
         })
     },
